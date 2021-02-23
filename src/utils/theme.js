@@ -17,5 +17,4 @@ const theme = {
 		largest: `only screen and (max-width: 90em)`,
 	},
 };
-
 export default theme;

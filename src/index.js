@@ -3,15 +3,15 @@ import React from 'react';
 import App from './App';
 import { ThemeProvider } from 'styled-components';
 import theme from './utils/theme';
-import createGlobalStyle from './utils/global';
+import GlobalStyle from './utils/global';
 
 ReactDOM.render(
 	<ThemeProvider theme={theme}>
 		<>
 			<App />
-			<createGlobalStyle></createGlobalStyle>
+			<GlobalStyle />
 		</>
 	</ThemeProvider>,
 
-	document.getElementById('root'),
+	document.getElementById('root')
 );

@@ -1,7 +1,10 @@
 import React from 'react';
+import Layout from "./layout/Layout";
 
 const App = () => {
-	return <div>akila</div>;
+    return ( 
+         <Layout> akila</Layout>
+    );
 };
 
 export default App;
