@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../../Logo/Logo";
-import Container from "../../../hoc/layout/elements/Container";
-import NavItems from '../NavItems/Navitems';
+import NavItems from "../NavItems/Navitems";
 
 const FixedWrapper = styled.div`
   position: fixed;
@@ -14,9 +13,10 @@ const FixedWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 6rem;
+  display: none;
 
-  @media ${props => props.theme.mediaQueries.smallest}{
-    display: none;
+  @media ${(props) => props.theme.mediaQueries.smallest} {
+    display: flex;
   }
 `;
 
@@ -25,17 +25,15 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Navbar = () => {
+const SideDrawer = () => {
   return (
     <FixedWrapper>
-      <Container>
-        <Wrapper>
-          <Logo />
-        <NavItems/>
-        </Wrapper>
-      </Container>
+      <Wrapper>
+              <Logo />
+        <NavItems />
+      </Wrapper>
     </FixedWrapper>
   );
 };
 
-export default Navbar;
+export default SideDrawer;

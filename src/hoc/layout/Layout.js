@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navigation/Navbar/Navbar";
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
 const MinWrapper = styled.div`
   width: 100%;
@@ -11,7 +12,8 @@ const MinWrapper = styled.div`
 const Layout = ({ children }) => {
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar />
+      <SideDrawer/>
       <MinWrapper>{children}</MinWrapper>
     </>
   );
