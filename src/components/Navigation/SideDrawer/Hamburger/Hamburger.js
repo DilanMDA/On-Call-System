@@ -43,9 +43,9 @@ const StyledHamb = styled.div`
   }
 `;
 
-const Hamburger = ({ opened }) => {
+const Hamburger = ({ opened, clicked }) => {
   return (
-    <StyledHamb opened={opened}>
+    <StyledHamb onClick={clicked} opened={opened}>
       <span />
       <span />
       <span />

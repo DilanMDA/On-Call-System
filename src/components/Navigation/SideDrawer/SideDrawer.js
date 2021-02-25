@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../../Logo/Logo";
 import NavItems from "../NavItems/Navitems";
@@ -23,19 +23,20 @@ const FixedWrapper = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
-  height:100%;
-  width:100%;
-  align-items:center;
+  height: 100%;
+  width: 100%;
+  align-items: center;
   justify-content: space-between;
 `;
 
 const SideDrawer = () => {
+  const [isOpened, setIsOpened] = useState(false);
   return (
     <FixedWrapper>
       <Wrapper>
         <Logo />
         <NavItems />
-        <Hamburger/>
+              <Hamburger opened={ isOpened } clicked={()=> setIsOpened(!isOpened)}/>
       </Wrapper>
     </FixedWrapper>
   );
