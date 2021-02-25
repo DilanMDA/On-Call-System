@@ -1,28 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import NavItem from './NavItem/NavItem';
 
 const Nav = styled.nav`
-display:flex;
+  display: flex;
+  margin-top: ${props => (props.mobile ? '-6rem' : null)};
 `;
 
 const Ul = styled.ul`
-display:flex;
-align-items: center;
-height:100%;
+  display: flex;
+  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
+  align-items: center;
+  height: 100%;
 `;
 
-const NavItems = () => {
-    return (
-        <Nav>
-            <Ul>
-                <NavItem link='/'>Home</NavItem>
-                <NavItem link='todos'>Todos</NavItem>
-                 
-            </Ul>
-            
-        </Nav>
-    )
-}
+const NavItems = ({ mobile, clicked }) => {
+  return (
+    <Nav mobile={mobile}>
+      <Ul mobile={mobile}>
+        <NavItem mobile={mobile} clicked={clicked} link="/">
+          home
+        </NavItem>
+        <NavItem mobile={mobile} clicked={clicked} link="/todos">
+          Todos
+        </NavItem>
+      </Ul>
+    </Nav>
+  );
+};
 
 export default NavItems;

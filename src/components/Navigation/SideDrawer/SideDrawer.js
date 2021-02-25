@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../../Logo/Logo";
+import NavItems from "../NavItems/Navitems";
 import Hamburger from "./Hamburger/Hamburger";
 
 const FixedWrapper = styled.header`
@@ -57,7 +58,7 @@ const SideDrawer = () => {
         </Wrapper>
       </FixedWrapper>
       <Menu opened={isOpened}>
-        Menu
+        <NavItems mobile clicked={() => setIsOpened(false)} />
       </Menu>
     </>
   );
