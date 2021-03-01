@@ -20,7 +20,7 @@ const store = createStore(
   composeEnhancers(
     reactReduxFirebase(firebase, rrfConfig),
     reduxFirestore(firebase),
-    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore }))
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })) // react & redux connect (interface)(react-logic)
   )
 );
 
