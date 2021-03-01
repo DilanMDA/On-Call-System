@@ -5,7 +5,7 @@ import * as Yup from "yup";
 
 import { FormWrapper, StyledForm } from "../../../hoc/layout/elements";
 import LoginInput from "../../../components/UI/Forms/Inputs/LoginInput";
-
+import Button from "../../../components/UI/Forms/Button/Button";
 const initialValues = {
   email: "",
   password: "",
@@ -43,7 +43,7 @@ const Login = () => {
               component={LoginInput}
             />
 
-            <button type="submit">Login</button>
+            <Button disabled={!isValid} type="submit">Login</Button>
           </StyledForm>
         </FormWrapper>
       )}
