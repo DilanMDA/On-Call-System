@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, Field } from "formik";
 import * as Yup from "yup";
 
 import { FormWrapper, StyledForm } from "../../../hoc/layout/elements";
