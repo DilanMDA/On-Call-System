@@ -27,7 +27,7 @@ const Login = () => {
     >
       {({ isSubmitting, isValid }) => (
         <FormWrapper>
-          <h1>Login her...</h1>
+          <h1>Login here...</h1>
           <StyledForm>
             <Field
               type="email"

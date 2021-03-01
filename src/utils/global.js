@@ -22,7 +22,8 @@ export default createGlobalStyle`
     --color-white: ${(props) => props.theme.colors.whiteColor};
     --color-black: ${(props) => props.theme.colors.blackColor};
     --color-form:${(props) => props.theme.colors.Avocado};
-    --color-input:${(props) => props.theme.colors.YellowGreenCrayola};
+    --color-input:${( props ) => props.theme.colors.YellowGreenCrayola};
+    --color-errorRed:${(props) => props.theme.colors.errorRed};
     --shadow: ${(props) => props.theme.colors.shadow};
   }
   @media ${(props) => props.theme.mediaQueries.small}{

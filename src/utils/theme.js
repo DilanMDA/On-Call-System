@@ -9,6 +9,7 @@ const theme = {
     textColor: "#333",
     whiteColor: "#fff",
     blackColor: "#000000",
+    errorRed:'#ac0622',
     shadow: "rgba(0,0,0,.2)",
   },
 

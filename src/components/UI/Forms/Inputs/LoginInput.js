@@ -1,36 +1,42 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledInput = styled.input`
-  padding: 1rem 2rem;
-  margin-bottom: 2rem;
-  background-color: var(--color-input);
-  border: none;
-  border-radius: 2rem;
-  font-weight: 700;
-  font-size: 1.6rem;
-
-  &::placeholder {
-    color: var(--color-black);
-    font-weight: 700;
-    font-size: 1.6rem;
-  }
-`;
-
 const InputWrapper = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
+  position: relative;
+  margin-bottom: 3.5rem;
   flex-direction: column;
+  &:last-of-type {
+    margin-bottom: 4.5rem;
+  }
+`;
 
-  &::not(::last-child) {
-    margin-bottom: 5.5rem;
+const StyledInput = styled.input`
+  padding: 1.2rem 2rem;
+  width: 100%;
+  background-color: var(--color-mainLight);
+  color: var(--color-white);
+  font-weight: 500;
+  font-size: 1.2rem;
+  border-radius: 2rem;
+  border: none;
+  &::placeholder {
+    color: var(--color-white);
   }
 `;
 
 const Error = styled.div`
-  color: #ac0622;
-  font-weight: 700;
+  color: var(--color-errorRed);
+  visibility: ${({ show }) => (show ? 'visibile' : 'hidden')};
+  opacity: ${({ show }) => (show ? '1' : '0')};
+  transform: translateY(${({ show }) => (show ? '20px' : '10px')});
+  transition: all 0.1s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0rem 2rem;
+  font-weight: 500;
   font-size: 1.2rem;
 `;
 
@@ -38,7 +44,9 @@ const LoginInput = ({ field, form: { touched, errors }, ...props }) => {
   return (
     <InputWrapper>
       <StyledInput {...field} {...props} />
-      <Error>{errors[field.name]} </Error>
+      <Error show={errors[field.name] && touched[field.name]}>
+        {errors[field.name]}{" "}
+      </Error>
     </InputWrapper>
   );
 };
