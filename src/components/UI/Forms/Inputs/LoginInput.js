@@ -28,9 +28,9 @@ const StyledInput = styled.input`
 
 const Error = styled.div`
   color: var(--color-errorRed);
-  visibility: ${({ show }) => (show ? 'visibile' : 'hidden')};
-  opacity: ${({ show }) => (show ? '1' : '0')};
-  transform: translateY(${({ show }) => (show ? '20px' : '10px')});
+  visibility: ${({ show }) => (show ? "visibile" : "hidden")};
+  opacity: ${({ show }) => (show ? "1" : "0")};
+  transform: translateY(${({ show }) => (show ? "20px" : "10px")});
   transition: all 0.1s;
   position: absolute;
   bottom: 0;
@@ -39,13 +39,12 @@ const Error = styled.div`
   font-weight: 500;
   font-size: 1.2rem;
 `;
-
 const LoginInput = ({ field, form: { touched, errors }, ...props }) => {
   return (
     <InputWrapper>
       <StyledInput {...field} {...props} />
       <Error show={errors[field.name] && touched[field.name]}>
-        {errors[field.name]}{" "}
+        {errors[field.name]}
       </Error>
     </InputWrapper>
   );

@@ -11,9 +11,9 @@ export const Container = styled.div`
 export const FormWrapper = styled.div`
   width: 100%;
   max-width: 50rem;
-  margin: 10% auto;
-  border-radius: 1rem;
-  padding: 4rem 8rem;
+  margin: 0 auto;
+  border-radius: 0.7rem;
+  padding: 5rem 7rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +23,6 @@ export const FormWrapper = styled.div`
 
 export const StyledForm = styled(Form)`
   display: flex;
-  flex-direction: column;
-  border-radius: 1rem;
   width: 100%;
+  flex-direction: column;
 `;
