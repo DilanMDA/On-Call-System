@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
 *,
@@ -20,6 +20,9 @@ export default createGlobalStyle`
     --color-mainLighter: ${(props) => props.theme.colors.mainLighter};
     --color-text: ${(props) => props.theme.colors.textColor};
     --color-white: ${(props) => props.theme.colors.whiteColor};
+    --color-black: ${(props) => props.theme.colors.blackColor};
+    --color-form:${(props) => props.theme.colors.Avocado};
+    --color-input:${(props) => props.theme.colors.YellowGreenCrayola};
     --shadow: ${(props) => props.theme.colors.shadow};
   }
   @media ${(props) => props.theme.mediaQueries.small}{

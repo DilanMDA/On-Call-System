@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../../Logo/Logo";
-import Container from "../../../hoc/layout/elements/Container";
+import {Container} from "../../../hoc/layout/elements";
 import NavItems from '../NavItems/Navitems';
 
 const FixedWrapper = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-between;
-  background-color: var(--color-main);
+  background-color: var(--color-mainDark);
   padding: 0rem 2rem;
   top: 0;
   left: 0;
