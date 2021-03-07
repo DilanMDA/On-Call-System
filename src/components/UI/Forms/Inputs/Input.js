@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const InputWrapper = styled.div`
   width: 100%;
@@ -28,9 +28,9 @@ const StyledInput = styled.input`
 
 const Error = styled.div`
   color: var(--color-errorRed);
-  visibility: ${({ show }) => (show ? "visibile" : "hidden")};
-  opacity: ${({ show }) => (show ? "1" : "0")};
-  transform: translateY(${({ show }) => (show ? "20px" : "10px")});
+  visibility: ${({ show }) => (show ? 'visibile' : 'hidden')};
+  opacity: ${({ show }) => (show ? '1' : '0')};
+  transform: translateY(${({ show }) => (show ? '20px' : '10px')});
   transition: all 0.1s;
   position: absolute;
   bottom: 0;
@@ -39,7 +39,8 @@ const Error = styled.div`
   font-weight: 500;
   font-size: 1.2rem;
 `;
-const SignUpInput = ({ field, form: { touched, errors }, ...props }) => {
+
+const Input = ({ field, form: { touched, errors }, ...props }) => {
   return (
     <InputWrapper>
       <StyledInput {...field} {...props} />
@@ -50,4 +51,4 @@ const SignUpInput = ({ field, form: { touched, errors }, ...props }) => {
   );
 };
 
-export default SignUpInput;
+export default Input;

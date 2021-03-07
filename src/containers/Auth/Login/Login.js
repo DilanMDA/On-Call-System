@@ -1,10 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
 
 import { FormWrapper, StyledForm } from "../../../hoc/layout/elements";
-import LoginInput from "../../../components/UI/Forms/Inputs/LoginInput";
+import LoginInput from "../../../components/UI/Forms/Inputs/Input";
 import Button from "../../../components/UI/Forms/Button/Button";
 import Heading from "../../../components/UI/Headings/Heading";
 const initialValues = {

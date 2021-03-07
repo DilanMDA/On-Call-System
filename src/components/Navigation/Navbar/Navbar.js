@@ -1,27 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../../Logo/Logo";
-import {Container} from "../../../hoc/layout/elements";
-import NavItems from '../NavItems/Navitems';
+import { Container } from "../../../hoc/layout/elements";
+import NavItems from "../NavItems/Navitems";
 
-const FixedWrapper = styled.div`
+const FixedWrapper = styled.header`
   position: fixed;
-  display: flex;
-  justify-content: space-between;
   background-color: var(--color-mainDark);
   padding: 0rem 2rem;
   top: 0;
   left: 0;
   width: 100%;
   height: 6rem;
-
-  @media ${props => props.theme.mediaQueries.smallest}{
+  @media ${(props) => props.theme.mediaQueries.smallest} {
     display: none;
   }
 `;
 
 const Wrapper = styled.div`
   display: flex;
+  height: 100%;
   justify-content: space-between;
 `;
 
@@ -31,7 +29,7 @@ const Navbar = () => {
       <Container>
         <Wrapper>
           <Logo />
-        <NavItems/>
+          <NavItems />
         </Wrapper>
       </Container>
     </FixedWrapper>
