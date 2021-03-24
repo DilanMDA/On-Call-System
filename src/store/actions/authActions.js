@@ -10,6 +10,6 @@ export const signUp = (data) => async (
     const res = await firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password);
-    console.log(res);
+    console.log(res.user.uid);
   } catch (error) {}
 };
