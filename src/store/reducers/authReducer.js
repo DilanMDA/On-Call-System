@@ -1,5 +1,9 @@
-const initialState = {};
-
-export default (state = initialState, action) => {
-  return 'dwadwadaw';
+const initialState = {
+  error: null,
+  loading: false,
 };
+
+const authReducer = (state = initialState, action) => {
+  return "state";
+};
+export default authReducer;
