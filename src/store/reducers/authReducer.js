@@ -1,3 +1,5 @@
+import * as actions from "../actions/actionTypes";
+
 const intialState = {
   error: null,
   loading: false,
@@ -6,12 +8,17 @@ const intialState = {
 // reducer function
 const authReducer = (state = intialState, { type, payload }) => {
   switch (type) {
-    case "AUTH_START":
+    case actions.AUTH_START:
       return { ...state, loading: true };
-    case "AUTH_END":
+
+    case actions.AUTH_END:
       return { ...state, loading: false };
-    case "AUTH_FAIL":
+
+    case actions.AUTH_FAIL:
       return { ...state, error: payload };
+
+    case actions.AUTH_SUCCESS:
+      return { ...state, error: false };
 
     default:
       return state;
