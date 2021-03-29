@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Form } from 'formik';
+import styled from "styled-components";
+import { Form } from "formik";
 
 export const Container = styled.div`
   width: 100%;
@@ -13,7 +13,7 @@ export const FormWrapper = styled.div`
   max-width: 50rem;
   margin: 0 auto;
   border-radius: 0.7rem;
-  padding: 5rem 7rem;
+  padding: 10rem 8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
