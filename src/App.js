@@ -8,6 +8,7 @@ import SignUp from "./containers/Auth/SignUp/SignUp";
 
 const App = () => {
   return (
+    
     <Layout>
       <Switch>
         <Route exact path="/" component={Home} />

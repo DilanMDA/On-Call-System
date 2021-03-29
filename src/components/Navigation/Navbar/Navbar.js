@@ -33,6 +33,7 @@ const Navbar = () => {
         </Wrapper>
       </Container>
     </FixedWrapper>
+    
   );
 };
 

@@ -38,7 +38,8 @@ const SignUpSchema = Yup.object().shape({
     .required("You need to confirm your password."),
 });
 
-const SignUp = ({ signUp }) => {
+const SignUp = ({ signUp, loading }) => {
+  console.log(loading);
   return (
     <Formik
       initialValues={initialValues}
@@ -98,7 +99,9 @@ const SignUp = ({ signUp }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = ({ auth }) => ({
+  loading: auth.loading,
+});
 
 const mapDispatchToProps = {
   signUp: actions.signUp,
