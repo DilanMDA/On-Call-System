@@ -97,7 +97,11 @@ const SignUp = ({ signUp, loading, error }) => {
               placeholder="Re-type your password..."
               component={SignUpInput}
             />
-            <Button disabled={!isValid} type="submit">
+         <Button
+              disabled={!isValid || isSubmitting}
+              loading={loading ? 'Signing up...' : null}
+              type="submit"
+            >
               Sign up
             </Button>
             <MessageWrapper>
