@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
+import styled from "styled-components";
 
 import { FormWrapper, StyledForm } from "../../../hoc/layout/elements";
 import SignUpInput from "../../../components/UI/Forms/Inputs/Input";
@@ -10,6 +11,11 @@ import Heading from "../../../components/UI/Headings/Heading";
 import Message from "../../../components/UI/Message/Message";
 
 import * as actions from "../../../store/actions";
+
+const MessageWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+`;
 
 const initialValues = {
   firstName: "",
@@ -94,9 +100,11 @@ const SignUp = ({ signUp, loading, error }) => {
             <Button disabled={!isValid} type="submit">
               Sign up
             </Button>
-            <Message error show={error}>
-              {error}
-            </Message>
+            <MessageWrapper>
+              <Message error show={error}>
+                {error}
+              </Message>
+            </MessageWrapper>
           </StyledForm>
         </FormWrapper>
       )}
