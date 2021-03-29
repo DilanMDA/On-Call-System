@@ -39,18 +39,19 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const SignUp = ({ signUp, loading }) => {
-  console.log(loading);
+  // console.log(loading);
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={SignUpSchema}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting }) => {
         console.log(values);
-        signUp(values);
+        await signUp(values);
         setSubmitting(false);
       }}
     >
       {({ isSubmitting, isValid }) => (
+        // console.log({ isSubmitting });
         <FormWrapper>
           <Heading noMargin size="h1" color="white">
             Sign up for an account
