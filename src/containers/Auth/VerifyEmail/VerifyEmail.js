@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { FormWrapper } from "../../../hoc/layout/elements";
@@ -22,7 +22,12 @@ const Wrapper = styled.div`
   padding: 1rem 0;
 `;
 
-const VerifyEmail = ({ sendVerification, error, loading }) => {
+const VerifyEmail = ({ sendVerification, error, loading, cleanUp }) => {
+  useEffect(() => {
+    return () => {
+      cleanUp();
+    };
+  }, [cleanUp]);
   return (
     <FormWrapper>
       <Wrapper>
@@ -62,6 +67,7 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = {
   sendVerification: actions.verifyEmail,
+  cleanUp: actions.clean,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerifyEmail);

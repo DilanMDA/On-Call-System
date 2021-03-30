@@ -12,6 +12,14 @@ const intialState = {
 // reducer function
 const authReducer = (state = intialState, { type, payload }) => {
   switch (type) {
+    case actions.CLEAN_UP:
+      return {
+        ...state,
+        error: null,
+        loading: false,
+        verifyEmail: { ...state.verifyEmail, loading: false, error: null },
+      };
+
     case actions.AUTH_START:
       return { ...state, loading: true };
 
@@ -23,9 +31,6 @@ const authReducer = (state = intialState, { type, payload }) => {
 
     case actions.AUTH_SUCCESS:
       return { ...state, error: false };
-
-    case actions.CLEAN_UP:
-      return { ...state, error: null, loading: false };
 
     case actions.VERIFY_START:
       return { ...state, verifyEmail: { ...state.verifyEmail, loading: true } };
