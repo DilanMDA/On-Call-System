@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const StyledButton = styled.button`
   width: 100%;
@@ -25,10 +25,10 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ children, disabled, ...rest }) => {
+const Button = ({ children, disabled, loading, ...rest }) => {
   return (
     <StyledButton disabled={disabled} {...rest}>
-      {children}
+      {loading ? loading : children}
     </StyledButton>
   );
 };
