@@ -10,7 +10,7 @@ const LogOut = ({ logout }) => {
 };
 
 const mapDispatchToProps = {
-  logout: actions.signOut,
+  logout: actions.signOut
 };
 
 export default connect(null, mapDispatchToProps)(LogOut);

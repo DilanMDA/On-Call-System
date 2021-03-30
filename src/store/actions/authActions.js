@@ -34,3 +34,23 @@ export const signOut = () => async (dispatch, getState, { getFirebase }) => {
     console.log(error.message);
   }
 };
+
+// Login action creatore
+export const signIn = ( data ) => async ( dispatch, getState, { getFirebase } ) =>
+{
+  const firebase = getFirebase();
+  dispatch({ type: actions.AUTH_START });
+  try
+  {
+    await firebase.auth().signInWithEmailAndPassword( data.email, data.password );
+      dispatch({ type: actions.AUTH_SUCCESS });
+  }
+  
+  catch ( error )
+  {
+    // console.log( error.message );
+    dispatch({ type: actions.AUTH_FAIL, payload: error.message });
+  }
+   dispatch({ type: actions.AUTH_END });
+    
+};
