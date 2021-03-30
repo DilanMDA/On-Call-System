@@ -3,6 +3,10 @@ import * as actions from "../actions/actionTypes";
 const intialState = {
   error: null,
   loading: false,
+  verifyEmail: {
+    error: null,
+    loading: false,
+  },
 };
 
 // reducer function
@@ -22,6 +26,21 @@ const authReducer = (state = intialState, { type, payload }) => {
 
     case actions.CLEAN_UP:
       return { ...state, error: null, loading: false };
+
+    case actions.VERIFY_START:
+      return { ...state, verifyEmail: { ...state.verifyEmail, loading: true } };
+
+    case actions.VERIFY_SUCCESS:
+      return {
+        ...state,
+        verifyEmail: { ...state.verifyEmail, loading: false, error: false },
+      };
+
+    case actions.VERIFY_FAIL:
+      return {
+        ...state,
+        verifyEmail: { ...state.verifyEmail, loading: false, error: payload },
+      };
 
     default:
       return state;
