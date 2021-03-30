@@ -5,21 +5,30 @@ import Layout from "./hoc/layout/Layout";
 import Home from "./containers/Home/Home";
 import Todos from "./containers/Todos/Todos";
 import Login from "./containers/Auth/Login/Login";
-import Logout from './containers/Auth/Logout/LogOut';
+import Logout from "./containers/Auth/Logout/LogOut";
 import SignUp from "./containers/Auth/SignUp/SignUp";
+import VerifyEmail from "./containers/Auth/VerifyEmail/VerifyEmail";
 
-
-const App = ({ loggedIn }) => {
-  console.log(loggedIn);
+const App = ({ loggedIn, emailVerified }) => {
+  // console.log(loggedIn);
 
   let routes;
-  if (loggedIn) {
+
+  if (loggedIn && !emailVerified) {
+    routes = (
+      <Switch>
+        <Route exact path="/verify-email" component={VerifyEmail} />
+        <Route exact path="/logout" component={Logout} />
+        <Redirect to="/verify-email" />
+      </Switch>
+    );
+  } else if (loggedIn && emailVerified) {
     routes = (
       <Switch>
         {/* <Route exact path="/" component={Home} /> */}
-        {/* <Route exact path="/todos" component={ Todos } /> */ }
+        {/* <Route exact path="/todos" component={ Todos } /> */}
         {/* always rout todos page */}
-        <Route exact path="/" component={ Todos } /> 
+        <Route exact path="/" component={Todos} />
         <Route exact path="/logout" component={Logout} />
         <Redirect to="/" />
       </Switch>
@@ -30,7 +39,7 @@ const App = ({ loggedIn }) => {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
-        {/* <Redirect to="/" /> */ }
+        {/* <Redirect to="/" /> */}
         <Redirect to="/login" />
       </Switch>
     );
@@ -40,7 +49,8 @@ const App = ({ loggedIn }) => {
 };
 
 const mapStateToProps = ({ firebase }) => ({
-  loggedIn: firebase.auth.uid ? true : null,
+  loggedIn: firebase.auth.uid,
+  emailVerified: firebase.auth.emailVerified,
 });
 
 export default connect(mapStateToProps)(App);
