@@ -1,22 +1,17 @@
-import React from 'react'
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 const LogoWrapper = styled.div`
-color: var(--color-white);
-height:100;
-display:flex;
-align-items:center;
-font-weight:700;
-font-size:1.2rem;
-padding:1rem;
+  color: var(--color-white);
+  height: 100;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 1rem;
 `;
 
-
 const Logo = () => {
-    return (
-        <LogoWrapper>
-            productivity
-        </LogoWrapper>
-    )
-}
+  return <LogoWrapper>On-Call System</LogoWrapper>;
+};
 
-export default Logo
+export default Logo;
