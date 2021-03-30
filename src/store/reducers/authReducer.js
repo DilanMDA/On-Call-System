@@ -7,6 +7,10 @@ const intialState = {
     error: null,
     loading: false,
   },
+  recoverPassword: {
+    error: null,
+    loading: false,
+  },
 };
 
 // reducer function
@@ -18,6 +22,11 @@ const authReducer = (state = intialState, { type, payload }) => {
         error: null,
         loading: false,
         verifyEmail: { ...state.verifyEmail, loading: false, error: null },
+        recoverPassword: {
+          ...state.recoverPassword,
+          loading: false,
+          error: null,
+        },
       };
 
     case actions.AUTH_START:
@@ -45,6 +54,30 @@ const authReducer = (state = intialState, { type, payload }) => {
       return {
         ...state,
         verifyEmail: { ...state.verifyEmail, loading: false, error: payload },
+      };
+
+    case actions.RECOVERY_START:
+      return {
+        ...state,
+        recoverPassword: { ...state.recoverPassword, loading: true },
+      };
+    case actions.RECOVERY_SUCCESS:
+      return {
+        ...state,
+        recoverPassword: {
+          ...state.recoverPassword,
+          loading: false,
+          error: false,
+        },
+      };
+    case actions.RECOVERY_FAIL:
+      return {
+        ...state,
+        recoverPassword: {
+          ...state.recoverPassword,
+          loading: false,
+          error: payload,
+        },
       };
 
     default:
