@@ -54,3 +54,8 @@ export const signIn = ( data ) => async ( dispatch, getState, { getFirebase } ) 
    dispatch({ type: actions.AUTH_END });
     
 };
+
+//clean up meaasage
+export const clean = () => ( {
+  type: actions.CLEAN_UP
+})
