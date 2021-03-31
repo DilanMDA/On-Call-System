@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 const LogoWrapper = styled.div`
   color: var(--color-white);
-  height: 100;
+  height: 100%;
   display: flex;
   align-items: center;
   font-weight: 700;
