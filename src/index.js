@@ -35,12 +35,12 @@ store.firebaseAuthIsReady.then(() => {
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
-        <>
-          <ThemeProvider theme={theme}>
-            <GlobalStyle />
+        <ThemeProvider theme={theme}>
+          <>
             <App />
-          </ThemeProvider>
-        </>
+            <GlobalStyle />
+          </>
+        </ThemeProvider>
       </BrowserRouter>
     </Provider>,
     root

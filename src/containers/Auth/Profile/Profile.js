@@ -1,21 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Formik, Field } from "formik";
-import * as Yup from "yup";
 import styled from "styled-components";
-
+import * as Yup from "yup";
 import { FormWrapper, StyledForm } from "../../../hoc/layout/elements";
-import SignUpInput from "../../../components/UI/Forms/Inputs/Input";
-import Button from "../../../components/UI/Forms/Button/Button";
-import Heading from "../../../components/UI/Headings/Heading";
 import Message from "../../../components/UI/Message/Message";
-
-import * as actions from "../../../store/actions";
+import Heading from "../../../components/UI/Headings/Heading";
+import Input from "../../../components/UI/Forms/Inputs/Input";
+import Button from "../../../components/UI/Forms/Button/Button";
 
 const MessageWrapper = styled.div`
   position: absolute;
   bottom: 0;
 `;
+
+const RecoverSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email.").required("The email is required"),
+});
 
 const initialValues = {
   firstName: "",
@@ -25,7 +26,7 @@ const initialValues = {
   confirmPassword: "",
 };
 
-const SignUpSchema = Yup.object().shape({
+const ProfileSchema = Yup.object().shape({
   firstName: Yup.string()
     .required("Your first name is required.")
     .min(3, "Too short.")
@@ -45,21 +46,14 @@ const SignUpSchema = Yup.object().shape({
     .required("You need to confirm your password."),
 });
 
-const SignUp = ({ signUp, loading, error, cleanUp }) => {
-  // console.log(error);
-  useEffect(() => {
-    return () => {
-      cleanUp();
-    };
-  }, [cleanUp]);
-
+const Profile = () => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={SignUpSchema}
+      validationSchema={ProfileSchema}
       onSubmit={async (values, { setSubmitting }) => {
         // console.log(values);
-        await signUp(values);
+        //edit the profile here
         setSubmitting(false);
       }}
     >
@@ -67,53 +61,53 @@ const SignUp = ({ signUp, loading, error, cleanUp }) => {
         // console.log({ isSubmitting });
         <FormWrapper>
           <Heading noMargin size="h1" color="white">
-            Sign up for an account
+            Edit your Profile
           </Heading>
           <Heading bold size="h4" color="white">
-            Fill in your details to register your new account
+            Here you can edit your profile
           </Heading>
           <StyledForm>
             <Field
               type="text"
               name="firstName"
               placeholder="Your first name..."
-              component={SignUpInput}
+              component={Input}
             />
             <Field
               type="text"
               name="lastName"
               placeholder="Your last name..."
-              component={SignUpInput}
+              component={Input}
             />
             <Field
               type="email"
               name="email"
               placeholder="Your email..."
-              component={SignUpInput}
+              component={Input}
             />
             <Field
               type="password"
               name="password"
               placeholder="Your password..."
-              component={SignUpInput}
+              component={Input}
             />
             <Field
               type="password"
               name="confirmPassword"
               placeholder="Re-type your password..."
-              component={SignUpInput}
+              component={Input}
             />
             <Button
               disabled={!isValid || isSubmitting}
-              loading={loading ? "Signing up..." : null}
+              // loading={loading ? "Signing up..." : null}
               type="submit"
             >
-              Sign up
+              Edit
             </Button>
             <MessageWrapper>
-              <Message error show={error}>
+              {/* <Message error show={error}>
                 {error}
-              </Message>
+              </Message> */}
             </MessageWrapper>
           </StyledForm>
         </FormWrapper>
@@ -122,14 +116,4 @@ const SignUp = ({ signUp, loading, error, cleanUp }) => {
   );
 };
 
-const mapStateToProps = ({ auth }) => ({
-  loading: auth.loading,
-  error: auth.error,
-});
-
-const mapDispatchToProps = {
-  signUp: actions.signUp,
-  cleanUp: actions.clean,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default Profile;
