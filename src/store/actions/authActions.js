@@ -24,8 +24,8 @@ export const signUp = (data) => async (
       lastName: data.lastName,
     });
     dispatch({ type: actions.AUTH_SUCCESS });
-  } catch (error) {
-    dispatch({ type: actions.AUTH_FAIL, payload: error.message }); //catch error automatically
+  } catch (erroror) {
+    dispatch({ type: actions.AUTH_FAIL, payload: erroror.message }); //catch erroror automatically
   }
   dispatch({ type: actions.AUTH_END });
 };
@@ -35,8 +35,8 @@ export const signOut = () => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
     await firebase.auth().signOut();
-  } catch (error) {
-    console.log(error.message);
+  } catch (erroror) {
+    console.log(erroror.message);
   }
 };
 
@@ -47,9 +47,9 @@ export const signIn = (data) => async (dispatch, getState, { getFirebase }) => {
   try {
     await firebase.auth().signInWithEmailAndPassword(data.email, data.password);
     dispatch({ type: actions.AUTH_SUCCESS });
-  } catch (error) {
-    // console.log( error.message );
-    dispatch({ type: actions.AUTH_FAIL, payload: error.message });
+  } catch (erroror) {
+    // console.log( erroror.message );
+    dispatch({ type: actions.AUTH_FAIL, payload: erroror.message });
   }
   dispatch({ type: actions.AUTH_END });
 };
@@ -65,33 +65,86 @@ export const verifyEmail = () => async (
   dispatch,
   getState,
   { getFirebase }
-) =>
-{
+) => {
   const firebase = getFirebase();
-  dispatch( { type: actions.VERIFY_START } );
-  try
-  {
+  dispatch({ type: actions.VERIFY_START });
+  try {
     const user = firebase.auth().currentUser;
     await user.sendEmailVerification();
-    dispatch({type: actions.VERIFY_SUCCESS})
-  } catch ( error )
-  {
-     dispatch( { type: actions.VERIFY_FAIL, payload:error.message } );
+    dispatch({ type: actions.VERIFY_SUCCESS });
+  } catch (erroror) {
+    dispatch({ type: actions.VERIFY_FAIL, payload: erroror.message });
   }
 };
 
 // Send recovery  password
 
-export const recoverPassword = (data) => async (dispatch, getState, { getFirebase }) => {
+export const recoverPassword = (data) => async (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
   const firebase = getFirebase();
   dispatch({ type: actions.RECOVERY_START });
-  try
-  {
+  try {
     //send email here
     await firebase.auth().sendPasswordResetEmail(data.email);
     dispatch({ type: actions.RECOVERY_SUCCESS });
+  } catch (erroror) {
+    // console.log( erroror.message );
+    dispatch({ type: actions.RECOVERY_FAIL, payload: erroror.message });
+  }
+};
+
+// Edit profile
+
+export const editProfile = (data) => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  const user = firebase.auth().currentUser;
+  const { uid: userId, email: userEmail } = getState().firebase.auth;
+  dispatch({ type: actions.PROFILE_EDIT_START });
+  try {
+    //edit the user profile
+    if (data.email !== userEmail) {
+      await user.updateEmail(data.email);
+    }
+
+    await firestore.collection("users").doc(userId).set({
+      firstName: data.firstName,
+      lastName: data.lastName,
+    });
+
+    if (data.password.length > 0) {
+      await user.updatePassword(data.password);
+    }
+    dispatch({ type: actions.PROFILE_EDIT_SUCCESS });
   } catch (error) {
-    // console.log( error.message );
-    dispatch({ type: actions.RECOVERY_FAIL, payload: error.message });
+    dispatch({ type: actions.PROFILE_EDIT_FAIL, payload: error.message });
+  }
+};
+
+// Delete User
+
+export const deleteUser = () => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  const user = firebase.auth().currentUser;
+  const userId = getState().firebase.auth.uid;
+  dispatch({ type: actions.DELETE_START });
+  try {
+    await firestore.collection("users").doc(userId).delete();
+
+    await user.delete();
+  } catch (error) {
+    dispatch({ type: actions.DELETE_FAIL, payload: error.message });
   }
 };

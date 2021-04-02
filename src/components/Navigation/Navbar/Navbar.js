@@ -23,17 +23,16 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Navbar = ({loggedIn}) => {
+const Navbar = ({ loggedIn }) => {
   return (
     <FixedWrapper>
       <Container>
         <Wrapper>
           <Logo />
-          <NavItems loggedIn= {loggedIn} />
+          <NavItems loggedIn={loggedIn} />
         </Wrapper>
       </Container>
     </FixedWrapper>
-    
   );
 };
 

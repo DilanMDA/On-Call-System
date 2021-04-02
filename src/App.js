@@ -9,11 +9,24 @@ import Logout from "./containers/Auth/Logout/LogOut";
 import SignUp from "./containers/Auth/SignUp/SignUp";
 import VerifyEmail from "./containers/Auth/VerifyEmail/VerifyEmail";
 import RecoverPassword from "./containers/Auth/RecoverPassword/RecoverPassword";
+import Profile from "./containers/Auth/Profile/Profile";
 
 const App = ({ loggedIn, emailVerified }) => {
   // console.log(loggedIn);
 
   let routes;
+  // if (!loggedIn && !emailVerified) {
+  //   routes = (
+  //     <Switch>
+  //       <Route exact path="/" component={Home} />
+  //       <Route exact path="/login" component={Login} />
+  //       <Route exact path="/signup" component={SignUp} />
+  //       <Route exact path="/recover" component={RecoverPassword} />
+  //       {/* <Redirect to="/" /> */}
+  //       <Redirect to="/" />
+  //     </Switch>
+  //   );
+  // }
 
   if (loggedIn && !emailVerified) {
     routes = (
@@ -29,7 +42,8 @@ const App = ({ loggedIn, emailVerified }) => {
         {/* <Route exact path="/" component={Home} /> */}
         {/* <Route exact path="/todos" component={ Todos } /> */}
         {/* always rout todos page */}
-        <Route exact path="/" component={Todos} />
+        <Route exact path="/" component={ Todos } />
+        <Route exact path="/profile" component={Profile} />
         <Route exact path="/logout" component={Logout} />
         <Redirect to="/" />
       </Switch>
