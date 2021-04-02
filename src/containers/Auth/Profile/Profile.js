@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Formik, Field } from "formik";
 import styled from "styled-components";
@@ -39,8 +39,16 @@ const profileSchema = Yup.object().shape({
   }),
 });
 
-const Profile = ({ firebase, editProfile, loading, error }) => {
+const Profile = ({ firebase, editProfile, loading, error, cleanUp }) => {
+  useEffect(() => {
+    //  effect
+    return () => {
+      cleanUp();
+    };
+  }, [cleanUp]);
+
   if (!firebase.profile.isLoaded) return null;
+
   return (
     <Formik
       initialValues={{
@@ -52,7 +60,7 @@ const Profile = ({ firebase, editProfile, loading, error }) => {
       }}
       validationSchema={profileSchema}
       onSubmit={async (values, { setSubmitting }) => {
-        console.log(values);
+        // console.log(values);
         await editProfile(values);
         // edit the profile
         setSubmitting(false);
@@ -131,6 +139,7 @@ const mapStateToProps = ({ firebase, auth }) => ({
 
 const mapDispatchToProps = {
   editProfile: actions.editProfile,
+  cleanUp: actions.clean,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
