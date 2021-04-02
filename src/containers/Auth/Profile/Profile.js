@@ -3,30 +3,20 @@ import { connect } from "react-redux";
 import { Formik, Field } from "formik";
 import styled from "styled-components";
 import * as Yup from "yup";
+
 import { FormWrapper, StyledForm } from "../../../hoc/layout/elements";
 import Message from "../../../components/UI/Message/Message";
 import Heading from "../../../components/UI/Headings/Heading";
 import Input from "../../../components/UI/Forms/Inputs/Input";
 import Button from "../../../components/UI/Forms/Button/Button";
+import { authIsReady } from "react-redux-firebase";
 
 const MessageWrapper = styled.div`
   position: absolute;
   bottom: 0;
 `;
 
-const RecoverSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email.").required("The email is required"),
-});
-
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
-
-const ProfileSchema = Yup.object().shape({
+const profileSchema = Yup.object().shape({
   firstName: Yup.string()
     .required("Your first name is required.")
     .min(3, "Too short.")
@@ -38,22 +28,31 @@ const ProfileSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email.")
     .required("The email is required."),
-  password: Yup.string()
-    .required("The passoword is required.")
-    .min(8, "The password is too short."),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], `Password doesn't match`)
-    .required("You need to confirm your password."),
+  password: Yup.string().min(8, "The password is too short."),
+  // .required("The passoword is required.")
+  confirmPassword: Yup.string().when("password", {
+    is: (password) => password.length > 0,
+    then: Yup.string()
+      .required("You need to confirm your password.")
+      .oneOf([Yup.ref("password"), null], `Password doesn't match`),
+  }),
 });
 
-const Profile = () => {
+const Profile = ({ firebase }) => {
+  if (!firebase.profile.isLoaded) return null;
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={ProfileSchema}
+      initialValues={{
+        firstName: firebase.profile.firstName,
+        lastName: firebase.profile.lastName,
+        email: firebase.auth.email,
+        password: "",
+        confirmPassword: "",
+      }}
+      validationSchema={profileSchema}
       onSubmit={async (values, { setSubmitting }) => {
-        // console.log(values);
-        //edit the profile here
+        console.log(values);
+        // edit the profile
         setSubmitting(false);
       }}
     >
@@ -61,7 +60,7 @@ const Profile = () => {
         // console.log({ isSubmitting });
         <FormWrapper>
           <Heading noMargin size="h1" color="white">
-            Edit your Profile
+            Edit Your Profile
           </Heading>
           <Heading bold size="h4" color="white">
             Here you can edit your profile
@@ -116,4 +115,10 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+const mapStateToProps = ({ firebase }) => ({
+  firebase,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps)(Profile);
