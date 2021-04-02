@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Formik, Field } from "formik";
 import styled from "styled-components";
@@ -16,6 +16,31 @@ import * as actions from "../../../store/actions";
 const MessageWrapper = styled.div`
   position: absolute;
   bottom: 0;
+  width: 100%;
+  bottom: 3.5rem;
+  padding: 0 3rem;
+`;
+
+const DeleteWrapper = styled.div`
+  cursor: pointer;
+  color: var(--color-errorRed);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  transition: all 0.2s;
+  &:hover {
+    transform: translateY(-3px);
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  margin-bottom: 2rem;
+  justify-content: space-around;
 `;
 
 const profileSchema = Yup.object().shape({
@@ -40,13 +65,24 @@ const profileSchema = Yup.object().shape({
   }),
 });
 
-const Profile = ({ firebase, editProfile, loading, error, cleanUp }) => {
+const Profile = ({
+  firebase,
+  editProfile,
+  loading,
+  error,
+  loadingDelete,
+  errorDelete,
+  deleteUser,
+  cleanUp,
+}) => {
   useEffect(() => {
     //  effect
     return () => {
       cleanUp();
     };
   }, [cleanUp]);
+
+  const [modalOpened, setModalOpened] = useState(false);
 
   if (!firebase.profile.isLoaded) return null;
 
@@ -126,11 +162,40 @@ const Profile = ({ firebase, editProfile, loading, error, cleanUp }) => {
                   Profile was update!
                 </Message>
               </MessageWrapper>
+              <DeleteWrapper onClick={() => setModalOpened(true)}>
+                Delete my account
+              </DeleteWrapper>
             </StyledForm>
           </FormWrapper>
         )}
       </Formik>
-      <Modal opened> This is the modal</Modal>
+      <Modal opened={modalOpened} close={() => setModalOpened(false)}>
+        <Heading noMargin size="h1" color="white">
+          Delete your Account
+        </Heading>
+        <Heading bold size="h4" color="white">
+          Do you really want to delete your account?
+        </Heading>
+        <ButtonsWrapper>
+          <Button
+            contain
+            onClick={() => deleteUser()}
+            color="red"
+            disabled={loadingDelete}
+            loading={loadingDelete ? "Deleting..." : null}
+          >
+            Delete
+          </Button>
+          <Button color="main" contain onClick={() => setModalOpened(false)}>
+            Cancel
+          </Button>
+        </ButtonsWrapper>
+        <MessageWrapper>
+          <Message error show={errorDelete}>
+            {errorDelete}
+          </Message>
+        </MessageWrapper>
+      </Modal>
     </>
   );
 };
@@ -139,11 +204,14 @@ const mapStateToProps = ({ firebase, auth }) => ({
   firebase,
   loading: auth.profileEdit.loading,
   error: auth.profileEdit.error,
+  loadingDelete: auth.deleteUser.loading,
+  errorDelete: auth.deleteUser.error,
 });
 
 const mapDispatchToProps = {
   editProfile: actions.editProfile,
   cleanUp: actions.clean,
+  deleteUser: actions.deleteUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

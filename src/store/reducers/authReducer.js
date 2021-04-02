@@ -17,6 +17,11 @@ const intialState = {
     error: null,
     loading: false,
   },
+
+  deleteUser: {
+    loading: false,
+    error: null,
+  },
 };
 
 // reducer function
@@ -35,6 +40,11 @@ const authReducer = (state = intialState, { type, payload }) => {
         },
         profileEdit: {
           ...state.profileEdit,
+          loading: false,
+          error: null,
+        },
+        deleteUser: {
+          ...state.deleteUser,
           loading: false,
           error: null,
         },
@@ -104,6 +114,15 @@ const authReducer = (state = intialState, { type, payload }) => {
       return {
         ...state,
         profileEdit: { ...state.profileEdit, loading: false, error: payload },
+      };
+
+    case actions.DELETE_START:
+      return { ...state, deleteUser: { ...state.deleteUser, loading: true } };
+
+    case actions.DELETE_FAIL:
+      return {
+        ...state,
+        deleteUser: { ...state.deleteUser, loading: false, error: payload },
       };
 
     default:

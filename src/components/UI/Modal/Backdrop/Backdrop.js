@@ -14,8 +14,8 @@ const Wrapper = styled.div`
   transition: all 0.1s;
 `;
 
-const Backdrop = ({ opened, click }) => {
-  return <Wrapper opened={opened} />;
+const Backdrop = ({ opened, close }) => {
+  return <Wrapper onClick={close} opened={opened} />;
 };
 
 export default Backdrop;
