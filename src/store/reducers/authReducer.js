@@ -7,7 +7,13 @@ const intialState = {
     error: null,
     loading: false,
   },
+
   recoverPassword: {
+    error: null,
+    loading: false,
+  },
+
+  profileEdit: {
     error: null,
     loading: false,
   },
@@ -24,6 +30,11 @@ const authReducer = (state = intialState, { type, payload }) => {
         verifyEmail: { ...state.verifyEmail, loading: false, error: null },
         recoverPassword: {
           ...state.recoverPassword,
+          loading: false,
+          error: null,
+        },
+        profileEdit: {
+          ...state.profileEdit,
           loading: false,
           error: null,
         },
@@ -78,6 +89,21 @@ const authReducer = (state = intialState, { type, payload }) => {
           loading: false,
           error: payload,
         },
+      };
+
+    case actions.PROFILE_EDIT_START:
+      return { ...state, profileEdit: { ...state.profileEdit, loading: true } };
+
+    case actions.PROFILE_EDIT_SUCCESS:
+      return {
+        ...state,
+        profileEdit: { ...state.profileEdit, loading: false, error: false },
+      };
+
+    case actions.PROFILE_EDIT_FAIL:
+      return {
+        ...state,
+        profileEdit: { ...state.profileEdit, loading: false, error: payload },
       };
 
     default:
